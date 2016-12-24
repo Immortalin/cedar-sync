@@ -13,7 +13,7 @@ func main() {
 	log.Println("Connecting to server...")
 
 	// Connect to server
-	c, err := client.DialTLS("imap.gmail.com:993", nil)
+	c, err := client.DialTLS("imap-mail.outlook.com:993", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -23,12 +23,9 @@ func main() {
 	defer c.Logout()
 
 	// Login
-	pw := os.Getenv("gmail_pw")
-	username := os.Getenv("gmail_username")
-	if pw == "" {
-		log.Fatal("Password Environmental Variable Empty!")
-	}
-	log.Println(pw)
+	username := os.Getenv("email_username")
+	pw := os.Getenv("email_pw")
+	log.Println(username, ":", pw)
 	if err := c.Login(username, pw); err != nil {
 		log.Fatal(err)
 	}
